@@ -542,7 +542,7 @@ class TaskProcessorTest extends Specification {
         task = new TaskRun(context: new TaskContext(holder: [:]))
         task.config = new TaskConfig(errorStrategy: 'retry', maxErrors: MAX_ERRORS, maxRetries: MAX_RETRIES )
         then:
-        proc.checkErrorStrategy(task, error, TASK_ERR_COUNT , PROC_ERR_COUNT, SUBMIT_RETRIES) == EXPECTED
+        proc.checkErrorStrategy(task, error, TASK_ERR_COUNT, PROC_ERR_COUNT, SUBMIT_RETRIES) == EXPECTED
 
         where:
         MAX_RETRIES | MAX_ERRORS    |   TASK_ERR_COUNT  |  PROC_ERR_COUNT   | SUBMIT_RETRIES    | EXPECTED

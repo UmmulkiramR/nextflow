@@ -248,10 +248,10 @@ abstract class TaskHandler {
 
     /**
      * Check if the task submit could not be accomplished with the time specified via the
-     * `maxWait` directive
+     * `maxAwait` directive
      *
      * @return
-     *      {@code true} if the task is in `submit` status after the amount of time specified
+     *      {@code true} if the task is in SUBMITTED status after the amount of time specified
      *      via {@code maxAwait} directive has passed, otherwise {@code false} is returned.
      */
     boolean isSubmitTimeout() {

@@ -1695,18 +1695,17 @@ See also: [cpus](#cpus) and [memory](#memory).
 
 ### maxAwait
 
-The `maxAwait` directives allows you to specify how long a task can remain in submission queue without being executed.
-Elapsed this time the task execution will fail.
+The `maxAwait` directive allows you to specify how long a task can remain in the submission queue, after which it will fail.
 
-When used along with `retry` error strategy, it can be useful to re-schedule the task to a difference queue or
-resource requirement. For example:
+When used along with the `retry` error strategy, it can be useful to re-schedule the task to a difference queue or with different resource requirements. For example:
 
 ```groovy
 process foo {
   errorStrategy 'retry'
   maxAwait '10 mins'
   maxRetries 3
-  queue "${task.submitAttempt==1 : 'spot-compute' : 'on-demand-compute'}"
+  queue { task.submitAttempt==1 : 'spot' : 'on-demand' }
+
   script:
   '''
   your_job --here
@@ -1714,9 +1713,7 @@ process foo {
 }
 ```
 
-In the above example the task is submitted to the `spot-compute` on the first attempt (`task.submitAttempt==1`). If the
-task execution does not start in the 10 minutes, a failure is reported and a new submission is attempted using the
-queue named `on-demand-compute`. 
+In the above example, the task is submitted to the `spot` queue on the first submit attempt (`task.submitAttempt==1`). If the task does not start after 10 minutes, it fails and a new submission is attempted using the `on-demand` queue. 
 
 (process-maxerrors)=
 
